@@ -1,4 +1,4 @@
-# Multimodal AI for Temperature Resilience Phenotyping
+# Multimodal AI for Personalized Assessment of Human Resilience to Extreme Temperature Conditions
 
 ## Overview
 
