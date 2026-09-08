@@ -109,10 +109,8 @@ These application contexts illustrate why heat and cold resilience are represent
 
 The research methodology, experiments, results, and discussion are documented in the current manuscript:
 
-**Personalized Assessment of Human Resilience to Heat and Cold Using Machine Learning**
+**Personalized Profiling of Human Resilience to Heat and Cold Using Machine Learning**
 
-The manuscript describes the construction of the two-dimensional temperature-resilience model, the machine-learning experiments, feature-importance analysis, and potential applications in occupational environments with high, low, and contrasting temperatures.
-
-The manuscript is under active development and may be revised as the research and publication preparation continue.
+The manuscript is under active development and may be revised as the research progresses and preparation for submission continues.
 
 [Read the current manuscript](article/personalized-heat-cold-resilience.pdf)
