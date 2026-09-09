@@ -7,7 +7,7 @@ An interpretable machine-learning framework for personalized assessment of human
 </p>
 
 <p align="center">
-  <em>Personalized temperature-resilience profiles in the two-dimensional heat–cold resilience space.</em>
+  <em>Schematic visualization of personalized temperature-resilience profiles in the two-dimensional heat–cold resilience space; points do not reproduce individual reference-cohort coordinates.</em>
 </p>
 
 > Heat resilience and cold resilience are modeled separately rather than collapsed into a single score, allowing asymmetric individual responses to remain visible.
@@ -18,9 +18,9 @@ People can respond very differently to the same environmental temperature exposu
 
 This creates a need for personalized models that move beyond population-average assessment and represent how a specific individual responds across different environmental conditions.
 
-The problem is relevant across contrasting climates. In Arctic environments, workers may face severe outdoor cold together with much warmer industrial settings, including deep mines, metallurgical facilities, compressor and gas-turbine equipment, and ship engine rooms.
+Personalized assessment is relevant to work involving extreme heat, extreme cold, or transitions between them. The physiological demands depend on the exposure and the individual, so each resilience dimension needs to be assessed in its own right.
 
-In hot-climate regions such as the UAE, prolonged heat exposure coexists with refrigerated facilities and cold-chain logistics that support food storage and food security. These contrasting conditions motivate a framework that represents heat and cold resilience separately within the same individual.
+Representing heat and cold separately supports research into individual response patterns across outdoor, industrial, and temperature-controlled environments, including Arctic regions and hot-climate regions such as the UAE.
 
 ## Research Question
 
@@ -34,7 +34,7 @@ The study combines interpretable feature aggregation with machine-learning analy
 
 ## Data Representation
 
-The analysis uses a reference dataset of **2,000 individual profiles**, calibrated from distributions and relationships reported in open physiological, population, and experimental data sources.
+The analysis uses a reference dataset of **2,000 individual profiles**, synthetically constructed and calibrated from distributions and relationships reported in open physiological, population, and experimental data sources. These are reference profiles, not a prospectively observed participant cohort. The reported validation measures agreement with the reference profile definition; it is not external or clinical validation.
 
 Each profile is represented by **205 analytical features** covering baseline physiological state, heat and cold response, cardiovascular dynamics, thermoregulation, pain response, recovery, biochemical response, individual characteristics, and environmental conditions.
 
@@ -114,3 +114,64 @@ The research methodology, experiments, results, and discussion are documented in
 The manuscript is under active development and may be revised as the research progresses and preparation for submission continues.
 
 [Read the current manuscript](article/personalized-heat-cold-resilience.pdf)
+
+
+## Implementation
+
+`classify_temperature_profiles.py` implements the frozen operational definition:
+raw measurements → signed robust z-scores → H/C indices → threshold rules → profile.
+It loads reference parameters from `models/two_index_model.joblib`; it does not call
+an Extra Trees predictor. The bundle also contains the fitted two-index Extra Trees
+estimator (`operational_model`) used in the ML experiments. The other two model
+files contain fitted prediction pipelines.
+
+The numerical rules and profile IDs are unchanged. English profile names match
+this README and `temperature_profile_schema.json`. The output contains
+`group_name_en`, the indices, profile scores, and a `borderline_review` flag.
+“Reduced resilience” denotes the residual category under these reference rules;
+it is not a clinical diagnosis or an independently validated impairment threshold.
+
+### Run the Operational Classifier
+
+The pinned dependencies were checked with Python 3.9 by loading all three saved
+model artifacts. They describe the verified loading environment, not a recovered
+record of the original training environment.
+
+```bash
+pip install -r requirements.txt
+python classify_temperature_profiles.py examples/input_template.csv results/predictions.csv
+```
+
+The supplied CSV contains headers only. Populate it with post-protocol measurements
+before classifying individual profiles. `--model` selects an alternative compatible
+scoring bundle.
+
+### Reproducibility Status
+
+The repository includes fitted models, frozen scoring parameters, and reported
+five-fold validation metrics. Original training/evaluation scripts, fold assignments,
+and the full reference dataset are not included, so the reported cross-validation
+results cannot currently be reproduced from this repository alone. Running the
+operational classifier does not reproduce those ML validation experiments.
+
+### Repository Structure
+
+```text
+README.md
+requirements.txt
+classify_temperature_profiles.py
+temperature_profile_schema.json
+article/
+  personalized-heat-cold-resilience.pdf
+materials/
+  temperature-resilience-profiles.png
+  feature-importance.png
+models/
+  two_index_model.joblib
+  full_post_protocol_model.joblib
+  early_response_model.joblib
+examples/
+  input_template.csv
+results/
+  validation_summary.json
+```

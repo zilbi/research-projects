@@ -1,11 +1,11 @@
 {
-  "schema_version": "four_group_temperature_resilience_2.0",
-  "created_from": "frozen 2,000-participant project reference cohort",
+  "schema_version": "temperature_profiles_2.1",
+  "created_from": "frozen 2,000-profile project reference cohort",
   "n_participants": 2000,
-  "unit_of_analysis": "one synthetic participant",
+  "unit_of_analysis": "one individual profile",
   "classification_mode": "post_protocol_operational_classification",
   "score_definition": "Mean of signed robust z-scores, centered by the reference median, scaled by reference IQR and clipped to [-3, 3]. When IQR is zero for a rare binary component, the frozen reference standard deviation is used as an explicit fallback.",
-  "reference_population_note": "Medians, IQRs and profile thresholds are frozen from the current 2,000-participant reference cohort; do not recalculate them on new cases. The requested 26/12/3/59 prevalence is imposed only on this calibration cohort, not on future batches.",
+  "reference_population_note": "Reference medians, scales and profile thresholds are frozen; do not recalculate them on new cases. Reference-cohort shares are not estimates of population prevalence or quotas for future batches.",
   "heat_reference": {
     "heat_duration_ratio": {
       "component": "heat_duration_ratio",
@@ -14,7 +14,7 @@
       ],
       "aggregation": "identity",
       "sign": 1,
-      "interpretation": "доля выполненного протокола",
+      "interpretation": "Proportion of the heat protocol completed",
       "median": 1.0,
       "q1": 0.9172101449275363,
       "q3": 1.0,
@@ -30,7 +30,7 @@
       ],
       "aggregation": "identity",
       "sign": -1,
-      "interpretation": "достижение предела тепловой переносимости",
+      "interpretation": "Heat-tolerance-limit events",
       "median": 0.0,
       "q1": 0.0,
       "q3": 0.5,
@@ -46,7 +46,7 @@
       ],
       "aggregation": "identity",
       "sign": -1,
-      "interpretation": "конечная температура ядра",
+      "interpretation": "Final core temperature",
       "median": 38.607224873890516,
       "q1": 38.25247479426569,
       "q3": 38.91674171414124,
@@ -62,7 +62,7 @@
       ],
       "aggregation": "identity",
       "sign": -1,
-      "interpretation": "скорость роста температуры ядра",
+      "interpretation": "Rate of core-temperature rise",
       "median": 0.0126443419908437,
       "q1": 0.0098406022673582,
       "q3": 0.0160659831490164,
@@ -78,7 +78,7 @@
       ],
       "aggregation": "identity",
       "sign": -1,
-      "interpretation": "скорость роста ЧСС",
+      "interpretation": "Rate of heart-rate rise",
       "median": 0.45649536636773275,
       "q1": 0.36647258336467353,
       "q3": 0.569784801510769,
@@ -94,7 +94,7 @@
       ],
       "aggregation": "identity",
       "sign": 1,
-      "interpretation": "минимальная HRV",
+      "interpretation": "Minimum heart-rate variability (HRV)",
       "median": 28.038118348940287,
       "q1": 19.47641814305811,
       "q3": 39.85083235107267,
@@ -110,7 +110,7 @@
       ],
       "aggregation": "identity",
       "sign": 1,
-      "interpretation": "восстановление HRV",
+      "interpretation": "HRV recovery",
       "median": 3.8060184009979423,
       "q1": 3.076785863414957,
       "q3": 9.305871255827547,
@@ -128,7 +128,7 @@
       ],
       "aggregation": "identity",
       "sign": 1,
-      "interpretation": "время переносимости холода",
+      "interpretation": "Cold tolerance duration",
       "median": 103.60507815229927,
       "q1": 78.61976946322925,
       "q3": 135.7556357694967,
@@ -144,7 +144,7 @@
       ],
       "aggregation": "identity",
       "sign": -1,
-      "interpretation": "интенсивность боли",
+      "interpretation": "Pain intensity",
       "median": 5.544983241051163,
       "q1": 3.704407268958877,
       "q3": 6.710164993242422,
@@ -160,7 +160,7 @@
       ],
       "aggregation": "identity",
       "sign": -1,
-      "interpretation": "автономная реакция",
+      "interpretation": "Autonomic response",
       "median": 9.259488318325658,
       "q1": 5.53718201291654,
       "q3": 15.14031188319253,
@@ -178,7 +178,7 @@
       ],
       "aggregation": "row_mean",
       "sign": 1,
-      "interpretation": "средняя минимальная HRV при 1/3/6 °C",
+      "interpretation": "Mean minimum HRV across 1/3/6 °C",
       "median": 35.136712883578696,
       "q1": 25.68192666103505,
       "q3": 46.08863268581338,
@@ -196,7 +196,7 @@
       ],
       "aggregation": "row_mean",
       "sign": 1,
-      "interpretation": "среднее восстановление HRV при 1/3/6 °C",
+      "interpretation": "Mean HRV recovery across 1/3/6 °C",
       "median": 7.254521191691416,
       "q1": 3.0238236984641746,
       "q3": 14.05149016037215,
@@ -214,7 +214,7 @@
       ],
       "aggregation": "row_mean",
       "sign": -1,
-      "interpretation": "доля раннего прекращения при 1/3/6 °C",
+      "interpretation": "Proportion of early withdrawals across 1/3/6 °C",
       "median": 0.0,
       "q1": 0.0,
       "q3": 0.0,
@@ -230,7 +230,7 @@
       ],
       "aggregation": "identity",
       "sign": 1,
-      "interpretation": "число завершённых cold-протоколов до cutoff",
+      "interpretation": "Number of cold protocols completed to the cutoff",
       "median": 1.0,
       "q1": 0.0,
       "q3": 2.0,
@@ -239,12 +239,6 @@
       "scale_method": "iqr",
       "clip": 3.0
     }
-  },
-  "target_shares": {
-    "1": 0.12,
-    "2": 0.26,
-    "3": 0.03,
-    "4": 0.59
   },
   "profile_rule": {
     "priority": [
@@ -264,20 +258,16 @@
   "borderline_margin": 0.05,
   "groups": {
     "1": {
-      "name_ru": "Преимущественно холодоустойчивые",
       "name_en": "Predominantly cold-resilient"
     },
     "2": {
-      "name_ru": "Преимущественно жароустойчивые",
       "name_en": "Predominantly heat-resilient"
     },
     "3": {
-      "name_ru": "Устойчивые к обоим экстремумам",
-      "name_en": "Resilient to both extremes"
+      "name_en": "Increased resilience to heat and cold"
     },
     "4": {
-      "name_ru": "Умеренный профиль",
-      "name_en": "Moderate profile"
+      "name_en": "Reduced resilience to heat and cold"
     }
   },
   "decision_rule": {
@@ -293,12 +283,5 @@
     "bootstrap_replicates_for_recall_ci": 2000,
     "primary_success_metric": "minimum per-group recall",
     "target": 0.8
-  },
-  "limitations": [
-    "The cohort is synthetic; results are not clinical validation.",
-    "The requested prevalence is a calibration constraint, not a naturally estimated population prevalence.",
-    "The primary classifier reproduces an explicit score definition after a full heat and cold protocol.",
-    "The early-protocol model does not meet the 80% per-group target.",
-    "External and prospective validation is required before high-stakes use."
-  ]
+  }
 }

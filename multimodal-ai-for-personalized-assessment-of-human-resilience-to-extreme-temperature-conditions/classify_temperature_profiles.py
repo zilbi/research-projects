@@ -10,10 +10,10 @@ import pandas as pd
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_MODEL = (
-    SCRIPT_DIR / "models" / "four_group_temperature_resilience_model.joblib"
+    SCRIPT_DIR / "models" / "two_index_model.joblib"
 )
 if not DEFAULT_MODEL.exists():
-    DEFAULT_MODEL = SCRIPT_DIR / "four_group_temperature_resilience_model.joblib"
+    DEFAULT_MODEL = SCRIPT_DIR / "two_index_model.joblib"
 
 
 def component_series(frame: pd.DataFrame, component: dict) -> pd.Series:
@@ -110,9 +110,6 @@ def classify(
             "heat_profile_score": heat_profile_score,
             "cold_profile_score": cold_profile_score,
             "group_id": group_id,
-            "group_name_ru": pd.Series(group_id, index=frame.index).map(
-                bundle["group_names_ru"]
-            ),
             "group_name_en": pd.Series(group_id, index=frame.index).map(
                 bundle.get("group_names_en", {})
             ),
@@ -126,7 +123,7 @@ def classify(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Assign four heat/cold resilience groups."
+        description="Assign post-protocol temperature profiles using frozen scoring rules."
     )
     parser.add_argument("input_csv", type=Path)
     parser.add_argument("output_csv", type=Path)
